@@ -12,7 +12,7 @@
     "upload-as": "./upload-appstore.sh",
     "upload-testflight": "./upload-testflight.sh",
     "upload-tf": "./upload-testflight.sh",
-    "build-android": "./libs/biuld-android.sh"
+    "build-android": "./build-android.sh"
   },
   "dependencies": {
     "axios": "^0.19.0",
