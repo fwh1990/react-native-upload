@@ -17,8 +17,12 @@ if (!fs.existsSync(file)) {
 const config = JSON.parse(fs.readFileSync(file).toString());
 const propertyValue = configPath.reduce((carry, item) => {
     if (carry[item] === undefined) {
-        console.error(colors.red(`\nUnable to find property "${configPath.join(' -> ')}" in file "upload.json"?\n`));
+        console.error(colors.red(`\nProperty "${configPath.join(' -> ')}" is missing in file "upload.json"?\n`));
         process.exit(1);
+    }
+
+    if (typeof carry[item] === 'boolean') {
+        return parseInt(carry[item], 10);
     }
 
     return carry[item];

@@ -7,7 +7,12 @@
   "license": "MIT",
   "bin": {
     "upload-init": "./init.js",
-    "upload-pgy": "./upload-pgy.sh"
+    "upload-pgy": "./upload-pgy.sh",
+    "upload-appstore": "./upload-appstore.sh",
+    "upload-as": "./upload-appstore.sh",
+    "upload-testflight": "./upload-testflight.sh",
+    "upload-tf": "./upload-testflight.sh",
+    "build-android": "./libs/biuld-android.sh"
   },
   "dependencies": {
     "axios": "^0.19.0",

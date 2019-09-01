@@ -2,5 +2,14 @@
   "pgy": {
     "pgy_api_key": "上传凭证，访问链接 https://www.pgyer.com/account/api ，复制Api Key",
     "ios_export_method": "ad-hoc"
+  },
+  "app_store": {
+    "username": "",
+    "random_password": "随机密码，需要在 https://appleid.apple.com/account/manage  中点击 App专用密码 生成"
+  },
+  "test_flight": {
+    "username": "",
+    "random_password": "随机密码，可与App Store共享同一个随机密码",
+    "ios_export_method": "ad-hoc"
   }
 }

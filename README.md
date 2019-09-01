@@ -10,7 +10,9 @@
 
 ### 已集成平台
 
->- [蒲公英](https://www.pgyer.com) 
+>- [蒲公英](https://www.pgyer.com)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(android + ios)
+>- [App Store](https://appstoreconnect.apple.com) &nbsp;&nbsp;&nbsp;&nbsp;(ios)
+>- [Test Flight](https://appstoreconnect.apple.com) &nbsp;&nbsp;&nbsp;(ios)
 
 # 安装
 ```bash
@@ -28,10 +30,25 @@ npx upload-init
 执行命令后会在项目根目录中创建一个`upload.json`文件，并生成以下内容：
 ```json5
 {
-    // 蒲公英配置
+    // 蒲公英
     "pgy": {
         // 上传凭证，访问链接 https://www.pgyer.com/account/api ，复制Api Key
         "pgy_api_key": "",
+        "ios_export_method": "ad-hoc"
+    },
+    // App Store
+    "app_store": {
+        // 用户（APP_ID）必须拥有该APP的上传权限
+        "username": "",
+        // 随机密码，需要在 https://appleid.apple.com/account/manage  中点击 App专用密码 生成
+        "random_password": ""
+    },
+    // Test Flight
+    "test_flight": {
+        // 用户（APP_ID）必须拥有该APP的上传权限
+        "username": "",
+        // 可与App Store配置共享同一个随机密码
+        "random_password": "",
         "ios_export_method": "ad-hoc"
     }
 }
@@ -48,6 +65,28 @@ npx upload-init
 #### 蒲公英
 ```bash
 npx upload-pgy
+```
+
+#### App Store
+```bash
+npx upload-appstore
+
+# 或者
+npx upload-as
+```
+
+#### Test Flight
+```bash
+npx upload-testflight
+
+# 或者
+npx upload-tf
+```
+
+# 打包Android
+部分平台只针对ios，所以如果想同时打包android的话，可以单独执行
+```bash
+npx build-android
 ```
 
 ------
