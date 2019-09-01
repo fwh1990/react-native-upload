@@ -6,7 +6,7 @@
 
 -------
 
-因为利用`shell`和`nodeJs`语法，而且ios只能使用MacOs处理。
+因为利用`shell`和`nodeJs`语法，而且ios只能使用Xcode处理。
 
 ### 已集成平台
 
@@ -28,11 +28,12 @@ npx upload-init
 执行命令后会在项目根目录中创建一个`upload.json`文件，并生成以下内容：
 ```json5
 {
-  // 蒲公英配置
-  "pgy": {
-    "pgy_api_key": "上传凭证，访问链接 https://www.pgyer.com/account/api ，复制Api Key",
-    "ios_export_method": "ad-hoc"
-  }
+    // 蒲公英配置
+    "pgy": {
+        // 上传凭证，访问链接 https://www.pgyer.com/account/api ，复制Api Key
+        "pgy_api_key": "",
+        "ios_export_method": "ad-hoc"
+    }
 }
 ```
 
@@ -44,7 +45,7 @@ npx upload-init
 
 # 上传方式
 
-## 蒲公英
+#### 蒲公英
 ```bash
 npx upload-pgy
 ```
