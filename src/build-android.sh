@@ -2,8 +2,15 @@
 
 set -e
 
-dir=$(dirname $0)/$(dirname $(readlink $0))
+if [ -z "$(readlink $0)" ]
+then
+  dir=$(dirname $0)
+else
+  dir=$(dirname $0)/$(dirname $(readlink $0))
+fi
 libs=$dir/libs
+
+echo -e "\n\033[32mBuilding android...\033[0m\n"
 
 sh $libs/build-android.sh
 

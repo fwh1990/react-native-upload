@@ -6,7 +6,7 @@
   "author": "范文华 <531362022@qq.com>",
   "license": "MIT",
   "bin": {
-    "upload-init": "./init.js",
+    "upload-init": "./init.sh",
     "upload-pgy": "./upload-pgy.sh",
     "upload-appstore": "./upload-appstore.sh",
     "upload-as": "./upload-appstore.sh",
