@@ -11,6 +11,7 @@
 ### 已集成平台
 
 >- [蒲公英](https://www.pgyer.com)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(android + ios)
+>- [fir.im](https://fir.im)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(android + ios)
 >- [App Store](https://appstoreconnect.apple.com) &nbsp;&nbsp;&nbsp;&nbsp;(ios)
 >- [Test Flight](https://appstoreconnect.apple.com) &nbsp;&nbsp;&nbsp;(ios)
 
@@ -36,11 +37,17 @@ npx upload-init
         "pgy_api_key": "",
         "ios_export_method": "ad-hoc"
     },
+    // fir.im
+    "fir": {
+        // 上传凭证，访问链接 https://fir.im/apps/apitoken ，复制token
+        "fir_api_token": "",
+        "ios_export_method": "ad-hoc"
+    },
     // App Store
     "app_store": {
         // 用户（APP_ID）必须拥有该APP的上传权限
         "username": "",
-        // 随机密码，需要在 https://appleid.apple.com/account/manage  中点击 App专用密码 生成
+        // 随机密码，访问链接 https://appleid.apple.com/account/manage ，点击 App专用密码 生成密码
         "random_password": ""
     },
     // Test Flight
@@ -67,6 +74,11 @@ npx upload-init
 npx upload-pgy
 ```
 
+#### fir.im
+```bash
+npx upload-fir
+```
+
 #### App Store
 ```bash
 npx upload-appstore
@@ -84,7 +96,7 @@ npx upload-tf
 ```
 
 # 打包Android
-部分平台只针对ios，所以如果想同时打包android的话，可以单独执行
+针对部分平台只针对ios的情况，如果想同时打包出android的apk包，可以单独执行命令：
 ```bash
 npx build-android
 ```
