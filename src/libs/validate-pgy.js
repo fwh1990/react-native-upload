@@ -1,13 +1,12 @@
 const minimist = require('minimist');
 const colors = require('colors');
-const qrcodeTerminal = require('qrcode-terminal');
 
 const args = minimist(process.argv.slice(2));
 const result = JSON.parse(args._[0]);
 
-if (result.buildShortcutUrl) {
-    console.log('\nVisit link: ' + colors.green(result.buildShortcutUrl) + '\n');
-    qrcodeTerminal.generate(result.buildShortcutUrl, console.log);
+if (result.code === 0) {
+    const url = 'https://www.pgyer.com/' + result.data.buildShortcutUrl;
+    console.log('\nVisit link: ' + colors.green(url) + '\n');
 } else {
     try {
         console.log(colors.red('\nError: ' + result.message + '\n'));
