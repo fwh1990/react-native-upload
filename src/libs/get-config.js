@@ -10,13 +10,13 @@ const configPath = (args._[0] || '').split('.');
 const file = path.resolve('upload.json');
 
 if (!fs.existsSync(file)) {
-    console.error(colors.red('\nOops, did you forget to create config file "upload.json"?\n'));
+    console.error(colors.red('\nOops, did you forget to create config file "upload.json"\n'));
     process.exit(1);
 }
 
 const config = JSON.parse(fs.readFileSync(file).toString());
 const propertyValue = configPath.reduce((carry, item) => {
-    if (carry[item] === undefined) {
+    if (carry[item] === undefined || carry[item] === '') {
         console.error(colors.red(`\nProperty "${configPath.join(' -> ')}" is missing in file "upload.json"?\n`));
         process.exit(1);
     }
