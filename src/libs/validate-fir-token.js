@@ -14,11 +14,11 @@ if (result.errors) {
 }
 
 console.log(`
-SHORT_URL=${result.short}
-ICON_KEY=${result.cert.icon.key}
-ICON_TOKEN=${result.cert.icon.token}
-ICON_UPLOAD_URL=${result.cert.icon.upload_url}
-BINARY_KEY=${result.cert.binary.key}
-BINARY_TOKEN=${result.cert.binary.token}
-BINARY_UPLOAD_URL=${result.cert.binary.upload_url}
+short_url=${result.short}
+icon_key=${result.cert.icon.key}
+icon_token=${result.cert.icon.token}
+icon_upload_url=${result.cert.icon.upload_url}
+binary_key=${result.cert.binary.key}
+binary_token=${result.cert.binary.token}
+binary_upload_url=${result.cert.binary.upload_url}
 `);

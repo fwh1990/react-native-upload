@@ -6,7 +6,7 @@ const result = JSON.parse(args._[0]);
 
 if (result.code === 0) {
     const url = 'https://www.pgyer.com/' + result.data.buildShortcutUrl;
-    console.log('\nVisit link: ' + colors.green(url) + '\n');
+    console.log('\nDownload app by visit link: ' + colors.green(url) + '\n');
 } else {
     try {
         console.log(colors.red('\nError: ' + result.message + '\n'));

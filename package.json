@@ -1,6 +1,6 @@
 {
   "name": "react-native-upload",
-  "version": "0.3.1",
+  "version": "0.3.5",
   "main": "index.js",
   "repository": "git@github.com:fwh1990/react-native-upload.git",
   "author": "范文华 <531362022@qq.com>",
@@ -16,6 +16,7 @@
     "build-android": "./build-android.sh"
   },
   "dependencies": {
+    "app-info-parser": "^0.3.3",
     "colors": "^1.3.3",
     "minimist": "^1.2.0"
   },

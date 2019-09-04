@@ -10,26 +10,26 @@ else
 fi
 libs=$dir/libs
 
-PGY_HOST=https://www.pgyer.com/apiv2/app/upload
-API_KEY=$(node $libs/get-config.js pgy.pgy_api_key)
-EXPORT_METHOD=$(node $libs/get-config.js pgy.ios_export_method)
+pgy_host=https://www.pgyer.com/apiv2/app/upload
+api_key=$(node $libs/get-config.js pgy.pgy_api_key)
+ios_export_method=$(node $libs/get-config.js pgy.ios_export_method)
 
 sh $libs/build-android.sh
 sh $libs/archive.sh
-sh $libs/export-ipa.sh $EXPORT_METHOD
+sh $libs/export-ipa.sh $ios_export_method
 
-APK_PATH=$(ls ./android/app/build/outputs/apk/release/*.apk)
-IPA_PATH=$(ls ./ios/build/ipa-${EXPORT_METHOD}/*.ipa)
+android_app=$(ls -l ./android/app/build/outputs/apk/release/*.apk | tail -n 1 | awk '{print $NF}')
+ios_app=$(ls ./ios/build/ipa-${ios_export_method}/*.ipa)
 
 # Android
-if [ -n "$APK_PATH" ]
+if [ -n "$android_app" ]
 then
   echo -e "\033[32mUploading android to pgyer...\033[0m"
   result=$(
     curl \
-      --form "file=@$APK_PATH" \
-      --form "_api_key=$API_KEY" \
-      ${PGY_HOST}
+      --form "file=@$android_app" \
+      --form "_api_key=$api_key" \
+      ${pgy_host}
   )
   node $libs/validate-pgy.js "$result"
 else
@@ -37,14 +37,14 @@ else
 fi
 
 # Ios
-if [ -n "$IPA_PATH" ]
+if [ -n "$ios_app" ]
 then
   echo -e "\033[32mUploading ios to pgyer...\033[0m"
   result=$(
     curl \
-      --form "file=@$IPA_PATH" \
-      --form "_api_key=$API_KEY" \
-      ${PGY_HOST}
+      --form "file=@$ios_app" \
+      --form "_api_key=$api_key" \
+      ${pgy_host}
   )
   node $libs/validate-pgy.js "$result"
 else
