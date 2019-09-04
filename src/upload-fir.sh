@@ -74,6 +74,7 @@ then
       --form "x:name=$android_name" \
       --form "x:version=$android_version" \
       --form "x:build=$android_code" \
+      --form "x:changelog=$(node $libs/changelog.js "$@")" \
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"
@@ -124,6 +125,7 @@ then
       --form "x:name=$ios_name" \
       --form "x:version=$ios_version" \
       --form "x:build=$ios_code" \
+      --form "x:changelog=$(node $libs/changelog.js "$@")" \
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"

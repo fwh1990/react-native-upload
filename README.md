@@ -72,11 +72,17 @@ npx upload-init
 #### 蒲公英
 ```bash
 npx upload-pgy
+
+# 或者填写更新日志
+npx upload-pgy --log "增加xxx功能"
 ```
 
 #### fir.im
 ```bash
 npx upload-fir
+
+# 或者填写更新日志
+npx upload-fir --log "增加xxx功能"
 ```
 
 #### App Store

@@ -44,6 +44,7 @@ then
     curl \
       --form "file=@$ios_app" \
       --form "_api_key=$api_key" \
+      --form "updateDescription=$(node $libs/changelog.js "$@")" \
       ${pgy_host}
   )
   node $libs/validate-pgy.js "$result"
