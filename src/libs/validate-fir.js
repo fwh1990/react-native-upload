@@ -6,9 +6,9 @@ const result = JSON.parse(args._[0]);
 
 if (result.error) {
     try {
-        console.error(colors.red('\nError: ' + result.error + '\n'));
+        console.error('\n' + colors.red('Error: ' + result.error) + '\n');
     } catch (e) {
-        console.error('\nError: ' + colors.red(args._[0]) + '\n');
+        console.error('\n' + colors.red('Error: ' + args._[0]) + '\n');
     }
     process.exit(1);
 }

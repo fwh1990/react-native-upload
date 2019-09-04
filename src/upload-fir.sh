@@ -116,6 +116,13 @@ then
   )
   rm -f $ios_icon
 
+  if [ "$ios_export_method" == "enterprise" ]
+  then
+    release_type=inhouse
+  else
+    release_type=adhoc
+  fi
+
   echo -e "\033[32m[fir.im] Uploading ios binary to...\033[0m"
   result=$(
     curl \
@@ -126,6 +133,7 @@ then
       --form "x:version=$ios_version" \
       --form "x:build=$ios_code" \
       --form "x:changelog=$(node $libs/changelog.js "$@")" \
+      --form "x:release_type=$release_type" \
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"
