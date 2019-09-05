@@ -10,6 +10,6 @@ else
 fi
 libs=$dir/libs
 
-EXPORT_METHOD=$(node $libs/get-config.js test_flight.ios_export_method)
+ios_export_method=$(node $libs/get-config.js test_flight.ios_export_method)
 
-sh $libs/appstore.sh $EXPORT_METHOD
+sh $libs/appstore.sh $ios_export_method

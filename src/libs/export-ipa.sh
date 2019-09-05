@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-# Variable EXPORT_METHOD can be one of [app-store, ad-hoc]
-EXPORT_METHOD=$1
+# Variable export_method can be one of [app-store, ad-hoc]
+export_method=$1
 
-#TEAM_ID=$(cat ios/*.xcodeproj/project.pbxproj | grep DEVELOPMENT_TEAM | head -n 1 | awk '{print $NF}' | tr -d ';')
-TEAM_ID_LINE=$(($(cat ios/build/archive.xcarchive/Info.plist | grep  -n  Team | cut -d: -f1) + 1))
-TEAM_ID=$(sed -n "${TEAM_ID_LINE}p" ./ios/build/archive.xcarchive/Info.plist | cut -d'>' -f2 | cut -d'<' -f1)
+#team_id=$(cat ios/*.xcodeproj/project.pbxproj | grep DEVELOPMENT_TEAM | head -n 1 | awk '{print $NF}' | tr -d ';')
+team_id_line=$(($(cat ios/build/archive.xcarchive/Info.plist | grep  -n  Team | cut -d: -f1) + 1))
+team_id=$(sed -n "${team_id_line}p" ./ios/build/archive.xcarchive/Info.plist | cut -d'>' -f2 | cut -d'<' -f1)
 
 export_option_file=/tmp/react-native-upload-ios-export_$$.plist
 
@@ -17,25 +17,25 @@ cat > $export_option_file <<EOF
 	<key>destination</key>
 	<string>export</string>
 	<key>method</key>
-	<string>$EXPORT_METHOD</string>
+	<string>$export_method</string>
 	<key>signingStyle</key>
 	<string>automatic</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>
-	<string>$TEAM_ID</string>
+	<string>$team_id</string>
 </dict>
 </plist>
 EOF
 
-mkdir -p ./ios/build/ipa-${EXPORT_METHOD}
-rm -rf ./ios/build/ipa-${EXPORT_METHOD}
+mkdir -p ./ios/build/ipa-${export_method}
+rm -rf ./ios/build/ipa-${export_method}
 
 # Export
 # The same as Xcode -> Window -> Organizer -> Export
 xcodebuild -exportArchive \
   -archivePath ./ios/build/archive.xcarchive \
-  -exportPath ./ios/build/ipa-${EXPORT_METHOD} \
+  -exportPath ./ios/build/ipa-${export_method} \
   -exportOptionsPlist $export_option_file \
   -allowProvisioningUpdates
 
