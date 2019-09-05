@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Archive
 # The same as Xcode -> Product -> Archive
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Variable export_method can be one of [app-store, ad-hoc]
 export_method=$1
 
