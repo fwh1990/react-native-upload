@@ -54,16 +54,19 @@ then
   # icon_token=
   # icon_upload_url=
 
-  echo -e "\033[32m[fir.im] Uploading android icon...\033[0m"
-  result=$(
-    curl \
-      --silent \
-      --form "file=@$android_icon" \
-      --form "key=$icon_key" \
-      --form "token=$icon_token" \
-      ${icon_upload_url}
-  )
-  rm -f $android_icon
+  if [ -n "$android_icon" ]
+  then
+    echo -e "\033[32m[fir.im] Uploading android icon...\033[0m"
+    result=$(
+      curl \
+        --silent \
+        --form "file=@$android_icon" \
+        --form "key=$icon_key" \
+        --form "token=$icon_token" \
+        ${icon_upload_url}
+    )
+    rm -f $android_icon
+  fi
 
   echo -e "\033[32m[fir.im] Uploading android binary...\033[0m"
   result=$(
@@ -105,16 +108,19 @@ then
   # icon_token=
   # icon_upload_url=
 
-  echo -e "\033[32m[fir.im] Uploading ios icon...\033[0m"
-  result=$(
-    curl \
-      --silent \
-      --form "file=@$ios_icon" \
-      --form "key=$icon_key" \
-      --form "token=$icon_token" \
-      ${icon_upload_url}
-  )
-  rm -f $ios_icon
+  if [ -n "$ios_icon" ]
+  then
+    echo -e "\033[32m[fir.im] Uploading ios icon...\033[0m"
+    result=$(
+      curl \
+        --silent \
+        --form "file=@$ios_icon" \
+        --form "key=$icon_key" \
+        --form "token=$icon_token" \
+        ${icon_upload_url}
+    )
+    rm -f $ios_icon
+  fi
 
   if [ "$ios_export_method" == "enterprise" ]
   then

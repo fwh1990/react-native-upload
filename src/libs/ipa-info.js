@@ -5,13 +5,16 @@ const minimist = require('minimist');
 
 const args = minimist(process.argv.slice(2));
 
-new AppInfoParser(args._[0]).parse().then(result => {
-    const iconPath = '/tmp/icon-ios-ipa-' + Math.random();
+new AppInfoParser(args._[0]).parse().then((result) => {
+    let iconPath = '';
 
-    fs.writeFileSync(
-        iconPath,
-        Buffer.from(result.icon.split(',')[1], 'base64')
-    );
+    if (result.icon) {
+        iconPath = '/tmp/icon-ios-ipa-' + Math.random();
+        fs.writeFileSync(
+            iconPath,
+            Buffer.from(result.icon.split(',')[1], 'base64'),
+        );
+    }
 
     console.log(`
         ios_icon=${iconPath}
