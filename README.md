@@ -113,7 +113,7 @@ npx upload-tf
 # 只打包不上传
 #### 同时打包android和ios
 ```bash
-npx build --ios-export-metohd xxx
+npx upload-build --ios-export-metohd xxx
 ```
 `--ios-export-method`可选择为下列数据中任意一个：
 >- app-store
@@ -124,12 +124,12 @@ npx build --ios-export-metohd xxx
 
 #### 单独打包android
 ```bash
-npx build-android
+npx upload-build-android
 ```
 
 #### 单独打包ios
 ```bash
-npx build-ios --ios-export-metohd xxx
+npx upload-build-ios --ios-export-metohd xxx
 ```
 
 ------

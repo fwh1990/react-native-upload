@@ -13,9 +13,9 @@
     "upload-as": "./upload-appstore.sh",
     "upload-testflight": "./upload-testflight.sh",
     "upload-tf": "./upload-testflight.sh",
-    "build-android": "./build-android.sh",
-    "build-ios": "./build-ios.sh",
-    "build": "./build.sh"
+    "upload-build-android": "./build-android.sh",
+    "upload-build-ios": "./build-ios.sh",
+    "upload-build": "./build.sh"
   },
   "dependencies": {
     "app-info-parser": "^0.3.3",
