@@ -23,6 +23,9 @@ echo -e "\033[032mValidating ios app...\033[0m"
   --username "$USERNAME" \
   --password "$PASSWORD"
 
+# In some case, it will fail when uploading, we'd better remove these folders.
+rm -rf ~/.itmstransporter/ ~/.old_itmstransporter/
+
 # Upload to https://appstoreconnect.apple.com/
 echo -e "\033[032mUploading ios app to appstore...\033[0m"
 /Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool \
