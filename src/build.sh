@@ -10,12 +10,12 @@ else
 fi
 libs=$dir/libs
 
+source $libs/export-method.sh "$@"
+
 echo -e "\n\033[32mBuilding android app...\033[0m\n"
 
 sh $libs/build-android.sh
 
-
-source $libs/export-method.sh "$@"
 
 echo -e "\n\033[32mBuilding ios app...\033[0m\n"
 
