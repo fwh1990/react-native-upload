@@ -67,13 +67,13 @@ npx upload-init
 >- enterprise
 >- development
 
-# 上传方式
+# 自动打包上传
 
 #### 蒲公英
 ```bash
 npx upload-pgy
 
-# 或者填写更新日志
+# 填写更新日志
 npx upload-pgy --log "增加xxx功能"
 
 # 忽略平台
@@ -85,7 +85,7 @@ npx upload-pgy --no-ios
 ```bash
 npx upload-fir
 
-# 或者填写更新日志
+# 填写更新日志
 npx upload-fir --log "增加xxx功能"
 
 # 忽略平台
@@ -94,6 +94,7 @@ npx upload-fir --no-ios
 ```
 
 #### App Store
+请确保已经在xcode中处理好签名和证书。最简单有效的方式就是您在xcode中手动打包并导出一份ipa文件，如果成功，那么自动打包也不会有问题。
 ```bash
 npx upload-appstore
 
@@ -109,10 +110,26 @@ npx upload-testflight
 npx upload-tf
 ```
 
-# 打包Android
-针对部分平台只针对ios的情况，如果想同时打包出android的apk包，可以单独执行命令：
+# 只打包不上传
+#### 同时打包android和ios
+```bash
+npx build --ios-export-metohd xxx
+```
+`--ios-export-method`可选择为下列数据中任意一个：
+>- app-store
+>- ad-hoc
+>- enterprise
+>- development
+
+
+#### 单独打包android
 ```bash
 npx build-android
+```
+
+#### 单独打包ios
+```bash
+npx build-ios --ios-export-metohd xxx
 ```
 
 ------
