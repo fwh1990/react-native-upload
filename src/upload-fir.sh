@@ -12,28 +12,46 @@ libs=$dir/libs
 
 fir_host=http://api.fir.im/apps
 api_token=$(node $libs/get-config.js fir.fir_api_token)
-ios_export_method=$(node $libs/get-config.js fir.ios_export_method)
 
-sh $libs/build-android.sh
+android=$(node $libs/get-config.js android#1 "$@")
+ios=$(node $libs/get-config.js ios#1 "$@")
 
-android_app=$(ls -l ./android/app/build/outputs/apk/release/*.apk | tail -n 1 | awk '{print $NF}')
-apk_info=$(node $libs/apk-info.js $android_app)
-eval "$apk_info"
+if [ $android -eq 0 ]
+then
+  echo -e "\n\033[33m[fir.im] Android is skipped.\033[0m\n"
+  sleep 1
+else
+  sh $libs/build-android.sh
 
-sh $libs/archive.sh
-sh $libs/export-ipa.sh $ios_export_method
+  android_app=$(ls -l ./android/app/build/outputs/apk/release/*.apk | tail -n 1 | awk '{print $NF}')
+  apk_info=$(node $libs/apk-info.js $android_app)
+  eval "$apk_info"
+fi
 
-ios_app=$(ls ./ios/build/ipa-${ios_export_method}/*.ipa)
-ipa_info=$(node $libs/ipa-info.js $ios_app)
-eval "$ipa_info"
-# ios_name=
-# ios_icon=
-# ios_bundle=
-# ios_code=
-# ios_version=
+if [ $ios -eq 0 ]
+then
+  echo -e "\n\033[33m[fir.im] Ios is skipped.\033[0m\n"
+  sleep 1
+else
+  ios_export_method=$(node $libs/get-config.js fir.ios_export_method)
+
+  sh $libs/archive.sh
+  sh $libs/export-ipa.sh $ios_export_method
+
+  ios_app=$(ls ./ios/build/ipa-${ios_export_method}/*.ipa)
+  ipa_info=$(node $libs/ipa-info.js $ios_app)
+  eval "$ipa_info"
+  # ios_name=
+  # ios_icon=
+  # ios_bundle=
+  # ios_code=
+  # ios_version=
+fi
 
 # Android
-if [ -n "$android_app" ]
+[ \( $android -ne 0 \) -a \( -z "$android_app" \) ] && echo -e "\033[31m[fir.im] Android file is missing.\033[0m"
+
+if [ \( $android -ne 0 \) -a \( -n "$android_app" \) ]
 then
   echo -e "\033[32m[fir.im] Getting android token...\033[0m"
   token_result=$(
@@ -77,17 +95,17 @@ then
       --form "x:name=$android_name" \
       --form "x:version=$android_version" \
       --form "x:build=$android_code" \
-      --form "x:changelog=$(node $libs/changelog.js "$@")" \
+      --form "x:changelog=$(node $libs/get-config.js log# "$@")" \
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"
   echo -e "\n[fir.im] Download app by visit link: \033[32mhttps://fir.im/$short_url\033[0m\n"
-else
-  echo -e "\033[31m[fir.im] Android file is missing.\033[0m"
 fi
 
 # Ios
-if [ -n "$ios_app" ]
+[ \( $ios -ne 0 \) -a \( -z "$ios_app" \) ] && echo -e "\033[31m[fir.im] Ios file is missing.\033[0m"
+
+if [ \( $ios -ne 0 \) -a \( -n "$ios_app" \) ]
 then
   echo -e "\033[32m[fir.im] Getting ios token...\033[0m"
   token_result=$(
@@ -138,12 +156,12 @@ then
       --form "x:name=$ios_name" \
       --form "x:version=$ios_version" \
       --form "x:build=$ios_code" \
-      --form "x:changelog=$(node $libs/changelog.js "$@")" \
+      --form "x:changelog=$(node $libs/get-config.js log# "$@")" \
       --form "x:release_type=$release_type" \
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"
   echo -e "\n[fir.im] Download app by visit link: \033[32mhttps://fir.im/$short_url\033[0m\n"
-else
-  echo -e "\033[31m[fir.im] Ios file is missing.\033[0m"
 fi
+
+echo -e "\033[32m[fir.im] Done!\033[0m"

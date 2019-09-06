@@ -11,3 +11,5 @@ fi
 libs=$dir/libs
 
 sh $libs/appstore.sh app-store
+
+echo -e "\033[32m[appstore] Done!\033[0m"

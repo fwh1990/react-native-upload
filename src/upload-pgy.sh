@@ -12,42 +12,62 @@ libs=$dir/libs
 
 pgy_host=https://www.pgyer.com/apiv2/app/upload
 api_key=$(node $libs/get-config.js pgy.pgy_api_key)
-ios_export_method=$(node $libs/get-config.js pgy.ios_export_method)
 
-sh $libs/build-android.sh
-sh $libs/archive.sh
-sh $libs/export-ipa.sh $ios_export_method
+android=$(node $libs/get-config.js android#1 "$@")
+ios=$(node $libs/get-config.js ios#1 "$@")
 
-android_app=$(ls -l ./android/app/build/outputs/apk/release/*.apk | tail -n 1 | awk '{print $NF}')
-ios_app=$(ls ./ios/build/ipa-${ios_export_method}/*.ipa)
+if [ $android -eq 0 ]
+then
+  echo -e "\n\033[33m[pgyer] Android is skipped.\033[0m\n"
+  sleep 1
+else
+  sh $libs/build-android.sh
+  android_app=$(ls -l ./android/app/build/outputs/apk/release/*.apk | tail -n 1 | awk '{print $NF}')
+fi
+
+if [ $ios -eq 0 ]
+then
+  echo -e "\n\033[33m[pgyer] Ios is skipped.\033[0m\n"
+  sleep 1
+else
+  ios_export_method=$(node $libs/get-config.js pgy.ios_export_method)
+
+  sh $libs/archive.sh
+  sh $libs/export-ipa.sh $ios_export_method
+
+  ios_app=$(ls ./ios/build/ipa-${ios_export_method}/*.ipa)
+fi
 
 # Android
-if [ -n "$android_app" ]
+[ \( $android -ne 0 \) -a \( -z "$android_app" \) ] && echo -e "\033[31m[pgyer] Android file is missing.\033[0m"
+
+if [ \( $android -ne 0 \) -a \( -n "$android_app" \) ]
 then
-  echo -e "\033[32mUploading android to pgyer...\033[0m"
+  echo -e "\033[32m[pgyer] Uploading android...\033[0m"
   result=$(
     curl \
       --form "file=@$android_app" \
       --form "_api_key=$api_key" \
+      --form "buildUpdateDescription=$(node $libs/get-config.js log# "$@")" \
       ${pgy_host}
   )
   node $libs/validate-pgy.js "$result"
-else
-  echo -e "\033[31mAndroid file is missing.\033[0m"
 fi
 
 # Ios
-if [ -n "$ios_app" ]
+[ \( $ios -ne 0 \) -a \( -z "$ios_app" \) ] && echo -e "\033[31m[pgyer] Ios file is missing.\033[0m"
+
+if [ \( $ios -ne 0 \) -a \( -n "$ios_app" \) ]
 then
-  echo -e "\033[32mUploading ios to pgyer...\033[0m"
+  echo -e "\033[32m[pgyer] Uploading ios...\033[0m"
   result=$(
     curl \
       --form "file=@$ios_app" \
       --form "_api_key=$api_key" \
-      --form "updateDescription=$(node $libs/changelog.js "$@")" \
+      --form "buildUpdateDescription=$(node $libs/get-config.js log# "$@")" \
       ${pgy_host}
   )
   node $libs/validate-pgy.js "$result"
-else
-  echo -e "\033[31mIos file is missing.\033[0m"
 fi
+
+echo -e "\033[32m[pgyer] Done!\033[0m"

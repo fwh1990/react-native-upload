@@ -6,7 +6,7 @@
 
 -------
 
-因为利用`shell`和`nodeJs`语法，而且ios只能使用Xcode处理。
+因为使用了`shell`语法，而且ios只能依赖Xcode处理。
 
 ### 已集成平台
 
@@ -75,6 +75,10 @@ npx upload-pgy
 
 # 或者填写更新日志
 npx upload-pgy --log "增加xxx功能"
+
+# 忽略平台
+npx upload-pgy --no-android
+npx upload-pgy --no-ios
 ```
 
 #### fir.im
@@ -83,13 +87,17 @@ npx upload-fir
 
 # 或者填写更新日志
 npx upload-fir --log "增加xxx功能"
+
+# 忽略平台
+npx upload-fir --no-android
+npx upload-fir --no-ios
 ```
 
 #### App Store
 ```bash
 npx upload-appstore
 
-# 或者
+# 或者缩写
 npx upload-as
 ```
 
@@ -97,7 +105,7 @@ npx upload-as
 ```bash
 npx upload-testflight
 
-# 或者
+# 或者缩写
 npx upload-tf
 ```
 
