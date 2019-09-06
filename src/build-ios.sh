@@ -17,4 +17,4 @@ echo -e "\n\033[32mBuilding ios app...\033[0m\n"
 sh $libs/archive.sh
 sh $libs/export-ipa.sh $export_method
 
-echo -e "\nView ipa file at: \033[32m./ios/ipa-$export_method\033[0m\n"
+echo -e "\nView ipa file at: \033[32m./ios/build/ipa-$export_method\033[0m\n"
