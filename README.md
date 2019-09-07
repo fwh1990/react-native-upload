@@ -13,7 +13,7 @@
 >- [蒲公英](https://www.pgyer.com)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(android + ios)
 >- [fir.im](https://fir.im)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(android + ios)
 >- [App Store](https://appstoreconnect.apple.com) &nbsp;&nbsp;&nbsp;&nbsp;(ios)
->- [Test Flight](https://appstoreconnect.apple.com) &nbsp;&nbsp;&nbsp;(ios)
+>- [Test Flight](https://developer.apple.com/testflight/) &nbsp;&nbsp;&nbsp;(ios)
 
 # 安装
 ```bash
@@ -71,7 +71,7 @@ npx upload-init
 
 # 自动打包上传
 
-#### 蒲公英
+### 蒲公英
 ```bash
 npx upload-pgy
 
@@ -83,7 +83,7 @@ npx upload-pgy --no-android
 npx upload-pgy --no-ios
 ```
 
-#### fir.im
+### fir.im
 ```bash
 npx upload-fir
 
@@ -95,7 +95,7 @@ npx upload-fir --no-android
 npx upload-fir --no-ios
 ```
 
-#### App Store
+### App Store
 请确保已经在xcode中处理好签名和证书。最简单有效的方式就是您在xcode中手动打包并导出一份ipa文件，如果成功，那么自动打包也不会有问题。
 ```bash
 npx upload-appstore
@@ -104,7 +104,7 @@ npx upload-appstore
 npx upload-as
 ```
 
-#### Test Flight
+### Test Flight
 ```bash
 npx upload-testflight
 
@@ -115,7 +115,7 @@ npx upload-tf
 # 只打包不上传
 由于某种原因，您只想安安静静地打包出app而不上传到任何平台，您可以用以下指令处理您的需求：
 
-#### 同时打包android和ios
+### 同时打包android和ios
 ```bash
 npx upload-build --ios-export-metohd xxx
 ```
@@ -126,12 +126,12 @@ npx upload-build --ios-export-metohd xxx
 >- development
 
 
-#### 单独打包android
+### 单独打包android
 ```bash
 npx upload-build-android
 ```
 
-#### 单独打包ios
+### 单独打包ios
 ```bash
 npx upload-build-ios --ios-export-metohd xxx
 ```
