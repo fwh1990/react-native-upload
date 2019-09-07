@@ -25,32 +25,34 @@ yarn add react-native-upload --dev
 ```
 
 # 初始化
+先执行这个命令：
 ```bash
 npx upload-init
 ```
 执行命令后会在项目根目录中创建一个`upload.json`文件，并生成以下内容：
 ```json5
+// 未用到的配置，可以置空不填写，也可以直接删除
 {
-    // 蒲公英
+    // 上传到蒲公英
     "pgy": {
         // 上传凭证，访问链接 https://www.pgyer.com/account/api ，复制Api Key
         "pgy_api_key": "",
         "ios_export_method": "ad-hoc"
     },
-    // fir.im
+    // 上传到fir.im
     "fir": {
         // 上传凭证，访问链接 https://fir.im/apps/apitoken ，复制token
         "fir_api_token": "",
         "ios_export_method": "ad-hoc"
     },
-    // App Store
+    // 上传到App Store
     "app_store": {
         // 用户（APP_ID）必须拥有该APP的上传权限
         "username": "",
         // 随机密码，访问链接 https://appleid.apple.com/account/manage ，点击 App专用密码 生成密码
         "random_password": ""
     },
-    // Test Flight
+    // 上传到Test Flight
     "test_flight": {
         // 用户（APP_ID）必须拥有该APP的上传权限
         "username": "",
@@ -111,6 +113,8 @@ npx upload-tf
 ```
 
 # 只打包不上传
+由于某种原因，您只想安安静静地打包出app而不上传到任何平台，您可以用以下指令处理您的需求：
+
 #### 同时打包android和ios
 ```bash
 npx upload-build --ios-export-metohd xxx
