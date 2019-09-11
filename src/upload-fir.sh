@@ -33,12 +33,15 @@ then
   echo -e "\n\033[33m[fir.im] Ios is skipped.\033[0m\n"
   sleep 1
 else
-  ios_export_method=$(node $libs/get-config.js fir.ios_export_method)
+  isource $libs/ipa-export-plist.sh fir.ios_export_plist
+  ios_export_method_line=$(($(cat "$ios_export_plist" | grep  -n  ">method<" | cut -d: -f1) + 1))
+  ios_export_method=$(sed -n "${ios_export_method_line}p" "$ios_export_plist" | cut -d'>' -f2 | cut -d'<' -f1)
+  ios_app_save_dir=./ios/build/rn-upload-app-temp
 
   sh $libs/archive.sh
-  sh $libs/export-ipa.sh $ios_export_method
+  sh $libs/export-ipa.sh $ios_export_plist $ios_app_save_dir
 
-  ios_app=$(ls ./ios/build/ipa-${ios_export_method}/*.ipa)
+  ios_app=$(ls $ios_app_save_dir/*.ipa)
   ipa_info=$(node $libs/ipa-info.js $ios_app)
   eval "$ipa_info"
   # ios_name=

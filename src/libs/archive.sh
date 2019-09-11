@@ -25,7 +25,9 @@ then
     -workspace "./ios/$workspace" \
     -scheme "$project_name" \
     -configuration "Release" \
-    -archivePath "$archive_path"
+    -archivePath "$archive_path" \
+    -allowProvisioningUpdates \
+    -showBuildTimingSummary
 else
   project=$(ls ios | grep '.xcodeproj')
   project_name=$(echo $project | cut -d. -f1)
@@ -38,5 +40,7 @@ else
     -project "./ios/$project" \
     -scheme "$project_name" \
     -configuration "Release" \
-    -archivePath "$archive_path"
+    -archivePath "$archive_path" \
+    -allowProvisioningUpdates \
+    -showBuildTimingSummary
 fi

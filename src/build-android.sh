@@ -12,6 +12,6 @@ libs=$dir/libs
 
 echo -e "\n\033[32mBuilding android app...\033[0m\n"
 
-sh $libs/build-android.sh
+bash $libs/build-android.sh
 
 echo -e "\nView apk file at: \033[32m./android/app/build/outputs/apk/release\033[0m\n"

@@ -4,13 +4,14 @@ set -e
 
 libs=$(dirname $0)
 
-USERNAME=$(node $libs/get-config.js app_store.username)
-PASSWORD=$(node $libs/get-config.js app_store.random_password)
-export_method=$1
+username=$(node $libs/get-config.js app_store.username)
+password=$(node $libs/get-config.js app_store.random_password)
+ios_export_plist=$1
+ios_app_save_dir=./ios/build/rn-upload-app-temp
 
-sh $libs/archive.sh
-sh $libs/export-ipa.sh $export_method
-ios_app=$(ls ./ios/build/ipa-$export_method/*.ipa)
+bash $libs/archive.sh
+bash $libs/export-ipa.sh $ios_export_plist $ios_app_save_dir
+ios_app=$(ls $ios_app_save_dir/*.ipa)
 
 # FIXME: I get the error "altool: command not found" when using alias
 #alias altool="/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
@@ -20,8 +21,8 @@ echo -e "\033[032mValidating ios app...\033[0m"
   --validate-app \
   --file "$ios_app" \
   --type "ios" \
-  --username "$USERNAME" \
-  --password "$PASSWORD"
+  --username "$username" \
+  --password "$password"
 
 # In some case, it will fail when uploading, we'd better remove these folders.
 rm -rf ~/.itmstransporter/ ~/.old_itmstransporter/
@@ -32,5 +33,5 @@ echo -e "\033[032mUploading ios app to appstore...\033[0m"
   --upload-app \
   --file "$ios_app" \
   --type "ios" \
-  --username "$USERNAME" \
-  --password "$PASSWORD"
+  --username "$username" \
+  --password "$password"

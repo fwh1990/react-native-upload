@@ -10,6 +10,8 @@ else
 fi
 libs=$dir/libs
 
-sh $libs/appstore.sh app-store
+source $libs/ipa-export-plist.sh app_store.ios_export_plist
 
-echo -e "\033[32m[appstore] Done!\033[0m"
+bash $libs/appstore.sh $ios_export_plist
+
+echo -e "\033[32m[app-store] Done!\033[0m"

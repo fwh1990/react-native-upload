@@ -1,19 +1,20 @@
 {
   "pgy": {
     "pgy_api_key": "",
-    "ios_export_method": "ad-hoc"
+    "ios_export_plist": "./ios-export/ad-hoc.plist"
   },
   "fir": {
     "fir_api_token": "",
-    "ios_export_method": "ad-hoc"
+    "ios_export_plist": "./ios-export/ad-hoc.plist"
   },
   "app_store": {
     "username": "",
-    "random_password": ""
+    "random_password": "",
+    "ios_export_plist": "./ios-export/app-store.plist"
   },
   "test_flight": {
     "username": "",
     "random_password": "",
-    "ios_export_method": "ad-hoc"
+    "ios_export_plist": "./ios-export/ad-hoc.plist"
   }
 }

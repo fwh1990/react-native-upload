@@ -10,8 +10,8 @@ else
 fi
 libs=$dir/libs
 
-ios_export_method=$(node $libs/get-config.js test_flight.ios_export_method)
+source $libs/ipa-export-plist.sh test_flight.ios_export_plist
 
-sh $libs/appstore.sh $ios_export_method
+bash $libs/appstore.sh $ios_export_plist
 
 echo -e "\033[32m[test-flight] Done!\033[0m"
