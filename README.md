@@ -82,7 +82,7 @@ ios的打包配置因人而异，在允许自动打包之前，为保证能准�
 导出的app目录中大致包含如下内容：
 ![](https://github.com/fwh1990/react-native-upload/blob/master/example.png?raw=true)
 
-请将文件`ExportOptionns.plist`复制到项目中，并保持与配置`ios_export_plist`所指向的路径一致。推荐您将文件重命名为打包方式的名称，如`ad-hoc`、`app-store`等。
+请将文件`ExportOptionns.plist`复制到项目中，并保持与配置`ios_export_plist`所指向的路径一致。推荐您将文件重命名为打包方式的名称，如`ad-hoc.plist`、`app-store.plist`等。
 
 # 自动打包上传
 
