@@ -24,6 +24,6 @@ new AppInfoParser(args._[0]).parse().then((result) => {
         android_bundle=${result.package}
     `);
 }).catch((error) => {
-    console.log(colors.red('Error: ' + error.message));
+    console.error(colors.red('Error: ' + error.message));
     process.exit(1);
 });

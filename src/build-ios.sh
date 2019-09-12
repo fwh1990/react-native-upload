@@ -10,7 +10,7 @@ else
 fi
 libs=$dir/libs
 
-source $libs/ipa-export-plist.sh ios-export-plist
+ios_export_plist=$(bash $libs/ipa-export-plist.sh ios-export-plist)
 ios_app_save_dir=./ios/build/rn-upload-app-build-only
 
 echo -e "\n\033[32mBuilding ios app...\033[0m\n"

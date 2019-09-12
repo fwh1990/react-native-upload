@@ -30,7 +30,7 @@ then
   echo -e "\n\033[33m[pgyer] Ios is skipped.\033[0m\n"
   sleep 1
 else
-  source $libs/ipa-export-plist.sh pgy.ios_export_plist
+  ios_export_plist=$(bash $libs/ipa-export-plist.sh pgy.ios_export_plist)
   ios_app_save_dir=./ios/build/rn-upload-app-temp
 
   sh $libs/archive.sh
