@@ -4,7 +4,7 @@ set -e
 
 libs=$(dirname $0)
 
-ios_export_plist=$(node $libs/get-config.js $1)
+ios_export_plist=$(node $libs/get-config.js "$@")
 
 if [ ! -f $ios_export_plist ]
 then

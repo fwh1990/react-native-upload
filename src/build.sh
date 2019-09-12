@@ -10,8 +10,16 @@ else
 fi
 libs=$dir/libs
 
-ios_export_plist=$(bash $libs/ipa-export-plist.sh ios-export-plist)
-ios_app_save_dir=./ios/build/rn-upload-app-build-only
+ios_export_plist=$(node $libs/get-config.js ios-export-plist# "$@")
+
+if [ -z "$ios_export_plist" ]
+then
+  echo -e "\n\033[31mError: The parameter \"ios-export-plist\" is required.\033[0m\n" 1>&2
+  echo -e "\033[33mnpx upload-build --ios-export-plist=path/to/xxx.plist\033[0m\n" 1>&2
+  exit 1
+fi
+
+ios_app_save_dir=./ios/build/app-$(date +%Y-%m-%d-%H-%M-%S)
 
 echo -e "\n\033[32mBuilding android app...\033[0m\n"
 
