@@ -12,6 +12,14 @@ libs=$dir/libs
 
 pgy_host=https://www.pgyer.com/apiv2/app/upload
 api_key=$(node $libs/get-config.js pgy.pgy_api_key)
+install_type=$(node $libs/get-config.js pgy.pgy_install_type)
+
+if [ $install_type -eq 2 ]
+then
+  install_password=$(node $libs/get-config.js pgy.pgy_install_password)
+else
+  install_password=$(node $libs/get-config.js pgy.pgy_install_password#)
+fi
 
 android=$(node $libs/get-config.js android#1 "$@")
 ios=$(node $libs/get-config.js ios#1 "$@")
@@ -49,6 +57,8 @@ then
     curl \
       --form "file=@$android_app" \
       --form "_api_key=$api_key" \
+      --form "buildInstallType=$install_type" \
+      --form "buildPassword=$install_password" \
       --form "buildUpdateDescription=$(node $libs/get-config.js log# "$@")" \
       ${pgy_host}
   )
@@ -65,6 +75,8 @@ then
     curl \
       --form "file=@$ios_app" \
       --form "_api_key=$api_key" \
+      --form "buildInstallType=$install_type" \
+      --form "buildPassword=$install_password" \
       --form "buildUpdateDescription=$(node $libs/get-config.js log# "$@")" \
       ${pgy_host}
   )

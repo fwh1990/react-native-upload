@@ -33,6 +33,10 @@ npx upload-init
     "pgy": {
         // 上传凭证，访问链接 https://www.pgyer.com/account/api ，复制Api Key
         "pgy_api_key": "",
+        // App安装方式，共有两种   2：密码安装，3：邀请安装
+        "pgy_install_type": 2,
+        // App安装时的访问密码，选择 "2密码安装" 时，访问密码必填
+        "pgy_install_password": "123456",
         "ios_export_plist": "./ios-export/ad-hoc.plist"
     },
     // 上传到fir.im
