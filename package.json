@@ -18,7 +18,7 @@
     "upload-build": "./build.sh"
   },
   "dependencies": {
-    "app-info-parser": "^0.3.3",
+    "app-info-parser": "^0.3.5",
     "colors": "^1.3.3",
     "minimist": "^1.2.0"
   },
