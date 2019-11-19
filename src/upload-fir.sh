@@ -21,6 +21,9 @@ then
   echo -e "\n\033[33m[fir.im] Android is skipped.\033[0m\n"
   sleep 1
 else
+  echo -e "\033[32m[fir.im] Building android app...\033[0m"
+  sleep 1
+
   sh $libs/build-android.sh
 
   android_app=$(ls -l ./android/app/build/outputs/apk/release/*.apk | tail -n 1 | awk '{print $NF}')
@@ -33,6 +36,9 @@ then
   echo -e "\n\033[33m[fir.im] Ios is skipped.\033[0m\n"
   sleep 1
 else
+  echo -e "\033[32m[fir.im] Building ios app...\033[0m"
+  sleep 1
+
   ios_export_plist=$(bash $libs/ipa-export-plist.sh fir.ios_export_plist)
   ios_export_method_line=$(($(cat "$ios_export_plist" | grep  -n  ">method<" | cut -d: -f1) + 1))
   ios_export_method=$(sed -n "${ios_export_method_line}p" "$ios_export_plist" | cut -d'>' -f2 | cut -d'<' -f1)

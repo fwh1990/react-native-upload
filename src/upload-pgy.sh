@@ -29,6 +29,9 @@ then
   echo -e "\n\033[33m[pgyer] Android is skipped.\033[0m\n"
   sleep 1
 else
+  echo -e "\033[32m[pgyer] Building android app...\033[0m"
+  sleep 1
+
   sh $libs/build-android.sh
   android_app=$(ls -l ./android/app/build/outputs/apk/release/*.apk | tail -n 1 | awk '{print $NF}')
 fi
@@ -38,6 +41,9 @@ then
   echo -e "\n\033[33m[pgyer] Ios is skipped.\033[0m\n"
   sleep 1
 else
+  echo -e "\033[32m[pgyer] Building ios app...\033[0m"
+  sleep 1
+
   ios_export_plist=$(bash $libs/ipa-export-plist.sh pgy.ios_export_plist)
   ios_app_save_dir=./ios/build/rn-upload-app-temp
 
