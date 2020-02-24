@@ -13,11 +13,8 @@ bash $libs/archive.sh
 bash $libs/export-ipa.sh $ios_export_plist $ios_app_save_dir
 ios_app=$(ls $ios_app_save_dir/*.ipa)
 
-# FIXME: I get the error "altool: command not found" when using alias
-#alias altool="/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool"
-
 echo -e "\033[032mValidating ios app...\033[0m"
-/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool \
+xcrun altool \
   --validate-app \
   --file "$ios_app" \
   --type "ios" \
@@ -29,7 +26,7 @@ rm -rf ~/.itmstransporter/ ~/.old_itmstransporter/
 
 # Upload to https://appstoreconnect.apple.com/
 echo -e "\033[032mUploading ios app to appstore...\033[0m"
-/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool \
+xcrun altool \
   --upload-app \
   --file "$ios_app" \
   --type "ios" \
