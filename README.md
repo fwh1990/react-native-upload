@@ -29,6 +29,7 @@ npx upload-init
 ```json5
 // 未用到的配置，可以置空不填写，也可以直接删除
 {
+
     // 上传到蒲公英
     "pgy": {
         // 上传凭证，访问链接 https://www.pgyer.com/account/api ，复制Api Key
@@ -39,18 +40,23 @@ npx upload-init
         "pgy_install_password": "123456",
         "ios_export_plist": "./ios-export/ad-hoc.plist"
     },
+
+
+
     // 上传到fir.im
     "fir": {
         // 上传凭证，访问链接 https://fir.im/apps/apitoken ，复制token
         "fir_api_token": "",
         "ios_export_plist": "./ios-export/ad-hoc.plist"
     },
+
+
+
     // 上传到App Store
     "app_store": {
-        ////////////////////////////////////////////////////////////////////////////
-        // 注意：
-        //      user_* 与 api_* 是互斥的，只需要填写其中一组即可正常上传
-        ////////////////////////////////////////////////////////////////////////////
+        ###########################################################################
+        ## 注意：user_* 与 api_* 是互斥的，只需要填写其中一组即可正常上传                ##
+        ###########################################################################
 
         // 用户（APPLE_ID）必须拥有该APP的上传权限
         "user_name": "",
@@ -58,25 +64,28 @@ npx upload-init
         "user_password": "",
 
         // 秘钥ID，访问链接 https://appstoreconnect.apple.com/access/api ，点击蓝色圆形+号图标即可生成秘钥。
-        ////////////////////////////////////////////////////////////////////////////
-        // 注意：
-        //      生成秘钥后，必须下载秘钥文件，并复制到以下随意一个文件夹中：
-        //              ./private_keys
-        //              ~/private_keys
-        //              ~/.private_keys
-        //              ~/.appstoreconnect/private_keys
-        ////////////////////////////////////////////////////////////////////////////
+        ##########################################################################
+        ## 注意：生成秘钥后，必须下载秘钥文件，并复制到以下随意一个文件夹中：              ##
+        ##             ./private_keys                                           ##
+        ##             ~/private_keys                                           ##
+        ##             ~/.private_keys                                          ##
+        ##             ~/.appstoreconnect/private_keys                          ##
+        ##########################################################################
         "api_key": "",
         // 生成秘钥后，秘钥的列表上方有个 Issuer ID
         "api_issuer": "",
 
         "ios_export_plist": "./ios-export/app-store.plist"
     },
+
+
+
     // 上传到Test Flight
     // 默认从app_store配置中拿 user_* 或者 api_*，也可以在test_flight配置下覆盖这几个参数
     "test_flight": {
         "ios_export_plist": "./ios-export/ad-hoc.plist"
     }
+
 }
 ```
 
