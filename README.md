@@ -2,7 +2,7 @@
 一键上传 android/ios APP到各个测试平台和`app store`
 
 ### 支持系统
-**MacOs**&nbsp;(使用了`shell`语法，而且ios只能依赖xcode软件)
+**MacOs**&nbsp;(使用了`bash`语法，而且ios只能依赖xcode软件)
 
 ### 已集成平台
 
@@ -47,22 +47,39 @@ npx upload-init
     },
     // 上传到App Store
     "app_store": {
-        // 用户（APP_ID）必须拥有该APP的上传权限
-        "username": "",
+        ////////////////////////////////////////////////////////////////////////////
+        // 注意：
+        //      user_* 与 api_* 是互斥的，只需要填写其中一组即可正常上传
+        ////////////////////////////////////////////////////////////////////////////
+
+        // 用户（APPLE_ID）必须拥有该APP的上传权限
+        "user_name": "",
         // 随机密码，访问链接 https://appleid.apple.com/account/manage ，点击 App专用密码 生成密码
-        "random_password": "",
+        "user_password": "",
+
+        // 秘钥ID，访问链接 https://appstoreconnect.apple.com/access/api ，点击蓝色圆形+号图标即可生成秘钥。
+        ////////////////////////////////////////////////////////////////////////////
+        // 注意：
+        //      生成秘钥后，必须下载秘钥文件，并复制到以下随意一个文件夹中：
+        //              ./private_keys
+        //              ~/private_keys
+        //              ~/.private_keys
+        //              ~/.appstoreconnect/private_keys
+        ////////////////////////////////////////////////////////////////////////////
+        "api_key": "",
+        // 生成秘钥后，秘钥的列表上方有个 Issuer ID
+        "api_issuer": "",
+
         "ios_export_plist": "./ios-export/app-store.plist"
     },
     // 上传到Test Flight
+    // 默认从app_store配置中拿 user_* 或者 api_*，也可以在test_flight配置下覆盖这几个参数
     "test_flight": {
-        // 用户（APP_ID）必须拥有该APP的上传权限
-        "username": "",
-        // 可与App Store配置共享同一个随机密码
-        "random_password": "",
         "ios_export_plist": "./ios-export/ad-hoc.plist"
     }
 }
 ```
+
 
 # 准备工作
 

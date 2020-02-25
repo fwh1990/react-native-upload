@@ -10,13 +10,15 @@
     "ios_export_plist": "./ios-export/ad-hoc.plist"
   },
   "app_store": {
-    "username": "",
-    "random_password": "",
+    "user_name": "",
+    "user_password": "",
+
+    "api_key": "",
+    "api_issuer": "",
+
     "ios_export_plist": "./ios-export/app-store.plist"
   },
   "test_flight": {
-    "username": "",
-    "random_password": "",
     "ios_export_plist": "./ios-export/ad-hoc.plist"
   }
 }

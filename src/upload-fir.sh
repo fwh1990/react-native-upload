@@ -10,6 +10,7 @@ else
 fi
 libs=$dir/libs
 
+log_prefix="Fir.im"
 fir_host=http://api.fir.im/apps
 api_token=$(node $libs/get-config.js fir.fir_api_token)
 
@@ -18,10 +19,10 @@ ios=$(node $libs/get-config.js ios#1 "$@")
 
 if [ $android -eq 0 ]
 then
-  echo -e "\n\033[33m[fir.im] Android is skipped.\033[0m\n"
+  echo -e "\n\033[33m[$log_prefix] Android is skipped.\033[0m\n"
   sleep 1
 else
-  echo -e "\033[32m[fir.im] Building android app...\033[0m"
+  echo -e "\033[32m[$log_prefix] Building android app...\033[0m"
   sleep 1
 
   sh $libs/build-android.sh
@@ -33,10 +34,10 @@ fi
 
 if [ $ios -eq 0 ]
 then
-  echo -e "\n\033[33m[fir.im] Ios is skipped.\033[0m\n"
+  echo -e "\n\033[33m[$log_prefix] Ios is skipped.\033[0m\n"
   sleep 1
 else
-  echo -e "\033[32m[fir.im] Building ios app...\033[0m"
+  echo -e "\033[32m[$log_prefix] Building ios app...\033[0m"
   sleep 1
 
   ios_export_plist=$(bash $libs/ipa-export-plist.sh fir.ios_export_plist)
@@ -58,11 +59,11 @@ else
 fi
 
 # Android
-[ \( $android -ne 0 \) -a \( -z "$android_app" \) ] && echo -e "\033[31m[fir.im] Android file is missing.\033[0m"
+[ \( $android -ne 0 \) -a \( -z "$android_app" \) ] && echo -e "\033[31m[$log_prefix] Android file is missing.\033[0m"
 
 if [ \( $android -ne 0 \) -a \( -n "$android_app" \) ]
 then
-  echo -e "\033[32m[fir.im] Getting android token...\033[0m"
+  echo -e "\033[32m[$log_prefix] Getting android token...\033[0m"
   token_result=$(
     curl \
       --silent \
@@ -83,7 +84,7 @@ then
 
   if [ -n "$android_icon" ]
   then
-    echo -e "\033[32m[fir.im] Uploading android icon...\033[0m"
+    echo -e "\033[32m[$log_prefix] Uploading android icon...\033[0m"
     result=$(
       curl \
         --silent \
@@ -95,7 +96,7 @@ then
     rm -f $android_icon
   fi
 
-  echo -e "\033[32m[fir.im] Uploading android app...\033[0m"
+  echo -e "\033[32m[$log_prefix] Uploading android app...\033[0m"
   result=$(
     curl \
       --form "file=@$android_app" \
@@ -108,15 +109,15 @@ then
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"
-  echo -e "\n[fir.im] Install app by open link: \033[32mhttps://fir.im/$short_url\033[0m\n"
+  echo -e "\n[$log_prefix] Install app by open link: \033[32mhttps://fir.im/$short_url\033[0m\n"
 fi
 
 # Ios
-[ \( $ios -ne 0 \) -a \( -z "$ios_app" \) ] && echo -e "\033[31m[fir.im] Ios file is missing.\033[0m"
+[ \( $ios -ne 0 \) -a \( -z "$ios_app" \) ] && echo -e "\033[31m[$log_prefix] Ios file is missing.\033[0m"
 
 if [ \( $ios -ne 0 \) -a \( -n "$ios_app" \) ]
 then
-  echo -e "\033[32m[fir.im] Getting ios token...\033[0m"
+  echo -e "\033[32m[$log_prefix] Getting ios token...\033[0m"
   token_result=$(
     curl \
       --silent \
@@ -137,7 +138,7 @@ then
 
   if [ -n "$ios_icon" ]
   then
-    echo -e "\033[32m[fir.im] Uploading ios icon...\033[0m"
+    echo -e "\033[32m[$log_prefix] Uploading ios icon...\033[0m"
     result=$(
       curl \
         --silent \
@@ -156,7 +157,7 @@ then
     release_type=adhoc
   fi
 
-  echo -e "\033[32m[fir.im] Uploading ios app...\033[0m"
+  echo -e "\033[32m[$log_prefix] Uploading ios app...\033[0m"
   result=$(
     curl \
       --form "file=@$ios_app" \
@@ -170,7 +171,7 @@ then
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"
-  echo -e "\n[fir.im] Install app by open link: \033[32mhttps://fir.im/$short_url\033[0m\n"
+  echo -e "\n[$log_prefix] Install app by open link: \033[32mhttps://fir.im/$short_url\033[0m\n"
 fi
 
-echo -e "\033[32m[fir.im] Done!\033[0m"
+echo -e "\033[32m[$log_prefix] Done!\033[0m"

@@ -10,6 +10,7 @@ else
 fi
 libs=$dir/libs
 
+log_prefix="Pgyer"
 pgy_host=https://www.pgyer.com/apiv2/app/upload
 api_key=$(node $libs/get-config.js pgy.pgy_api_key)
 install_type=$(node $libs/get-config.js pgy.pgy_install_type)
@@ -26,10 +27,10 @@ ios=$(node $libs/get-config.js ios#1 "$@")
 
 if [ $android -eq 0 ]
 then
-  echo -e "\n\033[33m[pgyer] Android is skipped.\033[0m\n"
+  echo -e "\n\033[33m[$log_prefix] Android is skipped.\033[0m\n"
   sleep 1
 else
-  echo -e "\033[32m[pgyer] Building android app...\033[0m"
+  echo -e "\033[32m[$log_prefix] Building android app...\033[0m"
   sleep 1
 
   sh $libs/build-android.sh
@@ -38,10 +39,10 @@ fi
 
 if [ $ios -eq 0 ]
 then
-  echo -e "\n\033[33m[pgyer] Ios is skipped.\033[0m\n"
+  echo -e "\n\033[33m[$log_prefix] Ios is skipped.\033[0m\n"
   sleep 1
 else
-  echo -e "\033[32m[pgyer] Building ios app...\033[0m"
+  echo -e "\033[32m[$log_prefix] Building ios app...\033[0m"
   sleep 1
 
   ios_export_plist=$(bash $libs/ipa-export-plist.sh pgy.ios_export_plist)
@@ -54,11 +55,11 @@ else
 fi
 
 # Android
-[ \( $android -ne 0 \) -a \( -z "$android_app" \) ] && echo -e "\033[31m[pgyer] Android file is missing.\033[0m"
+[ \( $android -ne 0 \) -a \( -z "$android_app" \) ] && echo -e "\033[31m[$log_prefix] Android file is missing.\033[0m"
 
 if [ \( $android -ne 0 \) -a \( -n "$android_app" \) ]
 then
-  echo -e "\033[32m[pgyer] Uploading android...\033[0m"
+  echo -e "\033[32m[$log_prefix] Uploading android...\033[0m"
   result=$(
     curl \
       --form "file=@$android_app" \
@@ -72,11 +73,11 @@ then
 fi
 
 # Ios
-[ \( $ios -ne 0 \) -a \( -z "$ios_app" \) ] && echo -e "\033[31m[pgyer] Ios file is missing.\033[0m"
+[ \( $ios -ne 0 \) -a \( -z "$ios_app" \) ] && echo -e "\033[31m[$log_prefix] Ios file is missing.\033[0m"
 
 if [ \( $ios -ne 0 \) -a \( -n "$ios_app" \) ]
 then
-  echo -e "\033[32m[pgyer] Uploading ios...\033[0m"
+  echo -e "\033[32m[$log_prefix] Uploading ios...\033[0m"
   result=$(
     curl \
       --form "file=@$ios_app" \
@@ -89,4 +90,4 @@ then
   node $libs/validate-pgy.js "$result"
 fi
 
-echo -e "\033[32m[pgyer] Done!\033[0m"
+echo -e "\033[32m[$log_prefix] Done!\033[0m"
