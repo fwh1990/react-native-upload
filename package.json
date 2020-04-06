@@ -20,7 +20,7 @@
   "dependencies": {
     "app-info-parser": "^0.3.9",
     "colors": "^1.4.0",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.3"
   },
   "devDependencies": {
     "@types/colors": "^1.2.1",
