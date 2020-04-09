@@ -11,7 +11,7 @@ fi
 libs=$dir/libs
 
 log_prefix="Fir.im"
-fir_host=http://api.fir.im/apps
+fir_host=http://api.bq04.com/apps
 api_token=$(node $libs/get-config.js fir.fir_api_token)
 
 android=$(node $libs/get-config.js android#1 "$@")
