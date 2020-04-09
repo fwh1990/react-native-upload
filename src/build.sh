@@ -23,13 +23,16 @@ ios_app_save_dir=./ios/build/app-$(date +%Y-%m-%d-%H-%M-%S)
 
 echo -e "\n\033[32mBuilding android app...\033[0m\n"
 
-pack_type=$(node $libs/pack-type.js "$@")
-bash $libs/build-android.sh $pack_type
+eval $(node $libs/pack-type.js "$@")
+# pack_variant=
+# pack_output_path=
+
+bash $libs/build-android.sh $pack_variant
 
 echo -e "\n\033[32mBuilding ios app...\033[0m\n"
 
 bash $libs/archive.sh
 bash $libs/export-ipa.sh $ios_export_plist  $ios_app_save_dir
 
-echo -e "\nView apk file at: \033[32m./android/app/build/outputs/apk/release\033[0m"
+echo -e "\nView apk file at: \033[32m./android/app/build/outputs/apk/$pack_output_path\033[0m"
 echo -e "\nView ipa file at: \033[32m$ios_app_save_dir\033[0m\n"

@@ -2,10 +2,16 @@ const minimist = require('minimist');
 
 const args = minimist(process.argv.slice(2));
 
-let releaseType = 'release';
-
-if (args.debug === true) {
-    releaseType = 'debug';
+if (!args.variant || typeof args.variant !== 'string') {
+    args.variant = 'release';
 }
 
-console.log(releaseType);
+// path is case-insensitive on macos
+const packVariant = args.variant.toLowerCase();
+
+console.log(
+    `
+    pack_variant=${packVariant}
+    pack_output_path=${packVariant.replace(/^(.*)(release|debug)$/, '$1/$2')}
+    `
+);

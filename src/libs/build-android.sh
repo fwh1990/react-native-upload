@@ -2,7 +2,7 @@
 
 set -e
 
-pack_type=$1
+pack_variant=$1
 
 # Build for android
 # The apk file will be at
@@ -10,11 +10,6 @@ pack_type=$1
 cd android
 rm -rf build/ app/build/
 
-if [ $pack_type = "debug" ]
-then
-    ./gradlew assembleDebug
-else
-    ./gradlew assembleRelease
-fi
+eval "./gradlew assemble$pack_variant"
 
 cd -

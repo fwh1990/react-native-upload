@@ -124,7 +124,7 @@ npx upload-pgy --no-android
 npx upload-pgy --no-ios
 
 # 安卓默认打包release版本，可以改成debug版本
-npx upload-pgy --debug
+npx upload-pgy --variant=debug
 ```
 
 ### fir.im
@@ -139,7 +139,7 @@ npx upload-fir --no-android
 npx upload-fir --no-ios
 
 # 安卓默认打包release版本，可以改成debug版本
-npx upload-fir --debug
+npx upload-fir  --variant=debug
 ```
 
 ### App Store
@@ -164,6 +164,9 @@ npx upload-tf
 ### 同时打包android和ios
 ```bash
 npx upload-build --ios-export-plist path/to/xxx.plist
+
+# 安卓默认打包release版本，可以改成debug版本
+npx upload-build --ios-export-plist path/to/xxx.plist --variant=debug
 ```
 
 
