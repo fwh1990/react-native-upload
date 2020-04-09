@@ -122,6 +122,9 @@ npx upload-pgy --log "增加xxx功能"
 # 忽略平台
 npx upload-pgy --no-android
 npx upload-pgy --no-ios
+
+# 安卓默认打包release版本，可以改成debug版本
+npx upload-pgy --debug
 ```
 
 ### fir.im
@@ -134,6 +137,9 @@ npx upload-fir --log "增加xxx功能"
 # 忽略平台
 npx upload-fir --no-android
 npx upload-fir --no-ios
+
+# 安卓默认打包release版本，可以改成debug版本
+npx upload-fir --debug
 ```
 
 ### App Store

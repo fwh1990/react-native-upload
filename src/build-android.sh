@@ -12,6 +12,8 @@ libs=$dir/libs
 
 echo -e "\n\033[32mBuilding android app...\033[0m\n"
 
-bash $libs/build-android.sh
+pack_type=$(node $libs/pack-type.js "$@")
 
-echo -e "\nView apk file at: \033[32m./android/app/build/outputs/apk/release\033[0m\n"
+bash $libs/build-android.sh $pack_type
+
+echo -e "\nView apk file at: \033[32m./android/app/build/outputs/apk/$pack_type\033[0m\n"

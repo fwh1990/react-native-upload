@@ -23,7 +23,8 @@ ios_app_save_dir=./ios/build/app-$(date +%Y-%m-%d-%H-%M-%S)
 
 echo -e "\n\033[32mBuilding android app...\033[0m\n"
 
-bash $libs/build-android.sh
+pack_type=$(node $libs/pack-type.js "$@")
+bash $libs/build-android.sh $pack_type
 
 echo -e "\n\033[32mBuilding ios app...\033[0m\n"
 

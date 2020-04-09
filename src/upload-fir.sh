@@ -25,9 +25,11 @@ else
   echo -e "\033[32m[$log_prefix] Building android app...\033[0m"
   sleep 1
 
-  sh $libs/build-android.sh
+  pack_type=$(node $libs/pack-type.js "$@")
 
-  android_app=$(ls -l ./android/app/build/outputs/apk/release/*.apk | tail -n 1 | awk '{print $NF}')
+  sh $libs/build-android.sh $pack_type
+
+  android_app=$(ls -l ./android/app/build/outputs/apk/$pack_type/*.apk | tail -n 1 | awk '{print $NF}')
   apk_info=$(node $libs/apk-info.js $android_app)
   eval "$apk_info"
 fi
