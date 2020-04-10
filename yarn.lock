@@ -119,10 +119,10 @@ long@~3:
   resolved "https://registry.npmjs.org/long/-/long-3.2.0.tgz#d821b7138ca1cb581c172990ef14db200b5c474b"
   integrity sha1-2CG3E4yhy1gcFymQ7xTbIAtcR0s=
 
-minimist@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-  integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
+minimist@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
+  integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
 pend@~1.2.0:
   version "1.2.0"
