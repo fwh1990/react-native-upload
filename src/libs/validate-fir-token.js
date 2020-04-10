@@ -13,8 +13,10 @@ if (result.errors) {
     process.exit(1);
 }
 
+const downloadUrl = (result.download_domain_https_ready ? 'https://' : 'http://') + result.download_domain + '/' + result.short;
+
 console.log(`
-short_url=${result.short}
+download_url=${downloadUrl}
 icon_key=${result.cert.icon.key}
 icon_token=${result.cert.icon.token}
 icon_upload_url=${result.cert.icon.upload_url}

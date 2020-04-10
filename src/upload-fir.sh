@@ -25,15 +25,10 @@ else
   echo -e "\033[32m[$log_prefix] Building android app...\033[0m"
   sleep 1
 
-  eval $(node $libs/pack-type.js "$@")
-  # pack_variant=
-  # pack_output_path=
+  pack_variant=$(node $libs/pack-type.js "$@")
 
   sh $libs/build-android.sh $pack_variant
-
-  android_app=$(ls -l ./android/app/build/outputs/apk/$pack_output_path/*.apk | tail -n 1 | awk '{print $NF}')
-  apk_info=$(node $libs/apk-info.js $android_app)
-  eval "$apk_info"
+  android_apps=$(find ./android/app/build/outputs/apk -type f -name *.apk)
 fi
 
 if [ $ios -eq 0 ]
@@ -62,58 +57,64 @@ else
   # ios_version=
 fi
 
-# Android
-[ \( $android -ne 0 \) -a \( -z "$android_app" \) ] && echo -e "\033[31m[$log_prefix] Android file is missing.\033[0m"
-
-if [ \( $android -ne 0 \) -a \( -n "$android_app" \) ]
+if [ $android -ne 0 ]
 then
-  echo -e "\033[32m[$log_prefix] Getting android token...\033[0m"
-  token_result=$(
-    curl \
-      --silent \
-      --request "POST" \
-      --header "Content-Type: application/json" \
-      --data "{\"type\":\"android\", \"bundle_id\":\"$android_bundle\", \"api_token\":\"$api_token\"}" \
-      ${fir_host}
-  )
-  token_log=$(node $libs/validate-fir-token.js "$token_result")
-  eval "$token_log"
-  # short_url=
-  # binary_key=
-  # binary_token=
-  # binary_upload_url=
-  # icon_key=
-  # icon_token=
-  # icon_upload_url=
+  for android_app in $android_apps
+  do
+    apk_info=$(node $libs/apk-info.js $android_app)
+    eval "$apk_info"
 
-  if [ -n "$android_icon" ]
-  then
-    echo -e "\033[32m[$log_prefix] Uploading android icon...\033[0m"
-    result=$(
+    echo -e "\033[32m[$log_prefix] Getting android token...\033[0m"
+    token_result=$(
       curl \
         --silent \
-        --form "file=@$android_icon" \
-        --form "key=$icon_key" \
-        --form "token=$icon_token" \
-        ${icon_upload_url}
+        --request "POST" \
+        --header "Content-Type: application/json" \
+        --data "{\"type\":\"android\", \"bundle_id\":\"$android_bundle\", \"api_token\":\"$api_token\"}" \
+        ${fir_host}
     )
-    rm -f $android_icon
-  fi
+    token_log=$(node $libs/validate-fir-token.js "$token_result")
+    eval "$token_log"
+    # download_url=
+    # binary_key=
+    # binary_token=
+    # binary_upload_url=
+    # icon_key=
+    # icon_token=
+    # icon_upload_url=
 
-  echo -e "\033[32m[$log_prefix] Uploading android app...\033[0m"
-  result=$(
-    curl \
-      --form "file=@$android_app" \
-      --form "key=$binary_key" \
-      --form "token=$binary_token" \
-      --form "x:name=$android_name" \
-      --form "x:version=$android_version" \
-      --form "x:build=$android_code" \
-      --form "x:changelog=$(node $libs/get-config.js log# "$@")" \
-      ${binary_upload_url}
-  )
-  node $libs/validate-fir.js "$result"
-  echo -e "\n[$log_prefix] Install app by open link: \033[32mhttps://fir.im/$short_url\033[0m\n"
+    if [ -n "$android_icon" ]
+    then
+      echo -e "\033[32m[$log_prefix] Uploading android icon...\033[0m"
+      result=$(
+        curl \
+          --silent \
+          --form "file=@$android_icon" \
+          --form "key=$icon_key" \
+          --form "token=$icon_token" \
+          ${icon_upload_url}
+      )
+      rm -f $android_icon
+    fi
+
+    echo -e "\033[32m[$log_prefix] Uploading android from $android_app ...\033[0m"
+    # Using http1.1 to against:
+    # curl: (92) HTTP/2 stream 0 was not closed cleanly: PROTOCOL_ERROR (err 1)
+    result=$(
+      curl \
+        --form "file=@$android_app" \
+        --form "key=$binary_key" \
+        --form "token=$binary_token" \
+        --form "x:name=$android_name" \
+        --form "x:version=$android_version" \
+        --form "x:build=$android_code" \
+        --form "x:changelog=$(node $libs/get-config.js log# "$@")" \
+        --http1.1 \
+        ${binary_upload_url}
+    )
+    node $libs/validate-fir.js "$result"
+    echo -e "\n[$log_prefix] Install app by open link: \033[32m$download_url\033[0m\n"
+  done
 fi
 
 # Ios
@@ -132,7 +133,7 @@ then
   )
   token_log=$(node $libs/validate-fir-token.js "$token_result")
   eval "$token_log"
-  # short_url=
+  # download_url=
   # binary_key=
   # binary_token=
   # binary_upload_url=
@@ -162,6 +163,8 @@ then
   fi
 
   echo -e "\033[32m[$log_prefix] Uploading ios app...\033[0m"
+  # Using http1.1 to against:
+  # curl: (92) HTTP/2 stream 0 was not closed cleanly: PROTOCOL_ERROR (err 1)
   result=$(
     curl \
       --form "file=@$ios_app" \
@@ -172,10 +175,11 @@ then
       --form "x:build=$ios_code" \
       --form "x:changelog=$(node $libs/get-config.js log# "$@")" \
       --form "x:release_type=$release_type" \
+      --http1.1 \
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"
-  echo -e "\n[$log_prefix] Install app by open link: \033[32mhttps://fir.im/$short_url\033[0m\n"
+  echo -e "\n[$log_prefix] Install app by open link: \033[32m$download_url\033[0m\n"
 fi
 
 echo -e "\033[32m[$log_prefix] Done!\033[0m"

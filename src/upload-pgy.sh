@@ -33,12 +33,10 @@ else
   echo -e "\033[32m[$log_prefix] Building android app...\033[0m"
   sleep 1
 
-  eval $(node $libs/pack-type.js "$@")
-  # pack_variant=
-  # pack_output_path=
+  pack_variant=$(node $libs/pack-type.js "$@")
 
   sh $libs/build-android.sh $pack_variant
-  android_app=$(ls -l ./android/app/build/outputs/apk/$pack_output_path/*.apk | tail -n 1 | awk '{print $NF}')
+  android_apps=$(find ./android/app/build/outputs/apk -type f -name *.apk)
 fi
 
 if [ $ios -eq 0 ]
@@ -58,22 +56,23 @@ else
   ios_app=$(ls $ios_app_save_dir/*.ipa)
 fi
 
-# Android
-[ \( $android -ne 0 \) -a \( -z "$android_app" \) ] && echo -e "\033[31m[$log_prefix] Android file is missing.\033[0m"
-
-if [ \( $android -ne 0 \) -a \( -n "$android_app" \) ]
+if [ $android -ne 0 ]
 then
-  echo -e "\033[32m[$log_prefix] Uploading android...\033[0m"
-  result=$(
-    curl \
-      --form "file=@$android_app" \
-      --form "_api_key=$api_key" \
-      --form "buildInstallType=$install_type" \
-      --form "buildPassword=$install_password" \
-      --form "buildUpdateDescription=$(node $libs/get-config.js log# "$@")" \
-      ${pgy_host}
-  )
-  node $libs/validate-pgy.js "$result"
+
+  for android_app in $android_apps
+  do
+    echo -e "\033[32m[$log_prefix] Uploading android from $android_app ...\033[0m"
+    result=$(
+      curl \
+        --form "file=@$android_app" \
+        --form "_api_key=$api_key" \
+        --form "buildInstallType=$install_type" \
+        --form "buildPassword=$install_password" \
+        --form "buildUpdateDescription=$(node $libs/get-config.js log# "$@")" \
+        ${pgy_host}
+    )
+    node $libs/validate-pgy.js "$result"
+  done
 fi
 
 # Ios
