@@ -13,8 +13,6 @@
     "upload-as": "./upload-appstore.sh",
     "upload-testflight": "./upload-testflight.sh",
     "upload-tf": "./upload-testflight.sh",
-    "upload-build-android": "./build-android.sh",
-    "upload-build-ios": "./build-ios.sh",
     "upload-build": "./build.sh"
   },
   "dependencies": {

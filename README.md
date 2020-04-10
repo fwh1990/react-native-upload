@@ -139,7 +139,7 @@ npx upload-fir --no-android
 npx upload-fir --no-ios
 
 # 安卓默认打包release版本，可以改成debug版本
-npx upload-fir  --variant=debug
+npx upload-fir --variant=debug
 ```
 
 ### App Store
@@ -161,23 +161,18 @@ npx upload-tf
 # 只打包不上传
 由于某种原因，您只想安安静静地打包出app而不上传到任何平台，您可以用以下指令处理您的需求：
 
-### 同时打包android和ios
 ```bash
+# 同时打包android和ios
 npx upload-build --ios-export-plist path/to/xxx.plist
 
 # 安卓默认打包release版本，可以改成debug版本
 npx upload-build --ios-export-plist path/to/xxx.plist --variant=debug
-```
 
+# 单独打包android
+npx upload-build --no-ios
 
-### 单独打包android
-```bash
-npx upload-build-android
-```
-
-### 单独打包ios
-```bash
-npx upload-build-ios --ios-export-plist path/to/xxx.plist
+# 单独打包ios
+npx upload-build --no-android --ios-export-plist path/to/xxx.plist
 ```
 
 ------
