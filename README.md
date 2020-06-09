@@ -123,8 +123,13 @@ npx upload-pgy --log "增加xxx功能"
 npx upload-pgy --no-android
 npx upload-pgy --no-ios
 
-# 安卓默认打包release版本，可以改成debug版本
+# android默认打包release版本，可以改成debug版本
 npx upload-pgy --variant=debug
+
+# 默认上传所有生成的android apk文件，可以使用正则表达式指定文件名称
+npx upload-pgy --apk=app-release.apk
+npx upload-pgy --apk=x86_64
+npx upload-pgy --apk=release-[0-9]
 ```
 
 ### fir.im
@@ -138,8 +143,13 @@ npx upload-fir --log "增加xxx功能"
 npx upload-fir --no-android
 npx upload-fir --no-ios
 
-# 安卓默认打包release版本，可以改成debug版本
+# android默认打包release版本，可以改成debug版本
 npx upload-fir --variant=debug
+
+# 默认上传所有生成的android apk文件，可以使用正则表达式指定文件名称
+npx upload-fir --apk=app-release.apk
+npx upload-fir --apk=x86_64
+npx upload-fir --apk=release-[0-9]
 ```
 
 ### App Store

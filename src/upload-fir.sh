@@ -28,7 +28,8 @@ else
   pack_variant=$(node $libs/pack-type.js "$@")
 
   sh $libs/build-android.sh $pack_variant
-  android_apps=$(find ./android/app/build/outputs/apk -type f -name *.apk)
+  explicit_apk_name=$(node $libs/get-config.js apk# "$@")
+  android_apps=$(find ./android/app/build/outputs/apk -type f -name *.apk | grep "$explicit_apk_name")
 fi
 
 if [ $ios -eq 0 ]
