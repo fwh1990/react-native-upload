@@ -19,10 +19,10 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-13.7.4.tgz#76c3cb3a12909510f52e5dc04a6298cdf9504ffd"
   integrity sha512-oVeL12C6gQS/GAExndigSaLxTrKpQPxewx9bOcwfvJiJge4rr7wNaph4J+ns5hrmIV2as5qxqN8YKthn9qh0jw==
 
-app-info-parser@^0.3.9:
-  version "0.3.9"
-  resolved "https://registry.npmjs.org/app-info-parser/-/app-info-parser-0.3.9.tgz#adc60c9d4d4aca4e529f21a6da1279b74ddaf62b"
-  integrity sha512-vIzO1OZSMnEz+OdGkhmSTS0y4PaQmXdF1YmzUBb7wsKR21JF1eXMnciARkUj6T+CLb9caoDSN+w5eSoGatRbcA==
+app-info-parser@^0.3.10:
+  version "0.3.10"
+  resolved "https://registry.npmjs.org/app-info-parser/-/app-info-parser-0.3.10.tgz#09626be34082f3e4718ad54f52e7b45eca3ee7dc"
+  integrity sha512-Lq8PPlOIqf9qN1acOTnNj1F2/vAtyu4Aeivyr4eTp9sAae+gLZuhpJ4lwiVeEI+wRtwcU2KcxaJZBN6gMGJXWg==
   dependencies:
     bplist-parser "^0.2.0"
     bytebuffer "^5.0.1"
