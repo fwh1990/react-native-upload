@@ -7,7 +7,7 @@
 ### 已集成平台
 
 >- [蒲公英](https://www.pgyer.com)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(android + ios)
->- [fir.im](https://fir.im)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(android + ios)
+>- [fir.im](https://betaqr.com)  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(android + ios)
 >- [App Store](https://appstoreconnect.apple.com) &nbsp;&nbsp;&nbsp;&nbsp;(ios)
 >- [Test Flight](https://developer.apple.com/testflight/) &nbsp;&nbsp;&nbsp;(ios)
 
@@ -45,7 +45,7 @@ npx upload-init
 
     // 上传到fir.im
     "fir": {
-        // 上传凭证，访问链接 https://fir.im/apps/apitoken ，复制token
+        // 上传凭证，访问链接 https://betaqr.com/apps/apitoken ，复制token
         "fir_api_token": "",
         "ios_export_plist": "./ios-export/ad-hoc.plist"
     },
