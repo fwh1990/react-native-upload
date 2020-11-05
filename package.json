@@ -16,13 +16,13 @@
     "upload-build": "./build.sh"
   },
   "dependencies": {
-    "app-info-parser": "^0.3.10",
+    "app-info-parser": "^0.3.13",
     "colors": "^1.4.0",
     "minimist": "^1.2.5"
   },
   "devDependencies": {
     "@types/colors": "^1.2.1",
     "@types/minimist": "^1.2.0",
-    "@types/node": "^13.7.4"
+    "@types/node": "^14.14.6"
   }
 }
