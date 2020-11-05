@@ -64,6 +64,11 @@ then
   do
     apk_info=$(node $libs/apk-info.js $android_app)
     eval "$apk_info"
+    # android_name=
+    # android_icon=
+    # android_bundle=
+    # android_code=
+    # android_version=
 
     echo -e "\033[32m[$log_prefix] Getting android token...\033[0m"
     token_result=$(
