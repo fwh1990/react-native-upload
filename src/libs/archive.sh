@@ -3,18 +3,18 @@
 set -e
 
 # Archive
-# The same as Xcode -> Product -> Archive
+# The same as `Xcode -> Product -> Archive`
+archive_path=./ios/build/archive.xcarchive
 
 mkdir -p ios/build
-rm -rf ios/build/archive.xcarchive
+rm -rf $archive_path
 
 # Since RN-0.60，Pods is required and we can only use workspace to archive app
-# Rememver: .xcodeproj dirtory is useless once .xcworkspace dirtory exists
+# Remember: .xcodeproj dirtory is useless once .xcworkspace dirtory exists
 set +e
 workspace=$(ls ios | grep '.xcworkspace')
 project=$(ls ios | grep '.xcodeproj')
 set -e
-archive_path=./ios/build/archive.xcarchive
 
 if [ -n "$workspace" ]
 then
@@ -50,4 +50,5 @@ then
     -showBuildTimingSummary
 else
   echo "\n\033[31mNeither workspace nor xcodeproj is found, it may be invalid ios project.\033[0m\n"
+  exit 1
 fi
