@@ -92,7 +92,7 @@ npx upload-init
 
 # 准备工作
 
-`ios_export_plist`即ios打包参数的存放路径。因为ios的打包参数及其复杂，每个项目都会有一些差异，所以为了保证能准确无误地打包出符合要求的app，您需要手动执行一次以下内容（**只需一次**）。
+`ios_export_plist`即ios打包参数的存放路径。因为ios的打包参数十分复杂，每个项目都会有一些差异，所以为了保证能准确无误地打包出符合要求的app，您需要手动执行一次以下内容（**只需一次**）。
 
 ### 1、手动打包
 点击 `Xcode -> Product -> Archive`，等待打包完成
@@ -126,7 +126,7 @@ npx upload-pgy --no-ios
 # android默认打包release版本，可以改成debug版本
 npx upload-pgy --variant=debug
 
-# 默认上传所有生成的android apk文件，可以使用正则表达式指定文件名称
+# 多渠道打包时，默认上传所有生成的android apk文件，可以使用正则表达式指定文件名称
 npx upload-pgy --apk=app-release.apk
 npx upload-pgy --apk=x86_64
 npx upload-pgy --apk=release-[0-9]
@@ -146,7 +146,7 @@ npx upload-fir --no-ios
 # android默认打包release版本，可以改成debug版本
 npx upload-fir --variant=debug
 
-# 默认上传所有生成的android apk文件，可以使用正则表达式指定文件名称
+# 多渠道打包时，默认上传所有生成的android apk文件，可以使用正则表达式指定文件名称
 npx upload-fir --apk=app-release.apk
 npx upload-fir --apk=x86_64
 npx upload-fir --apk=release-[0-9]
@@ -187,4 +187,4 @@ npx upload-build --no-android --ios-export-plist path/to/xxx.plist
 
 ------
 
-欢迎使用并给我提建议
+欢迎使用并给我提建议，有任何通用平台需要集成也可以cue我
