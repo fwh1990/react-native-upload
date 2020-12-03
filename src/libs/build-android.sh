@@ -10,6 +10,6 @@ pack_variant=$1
 cd android
 rm -rf build/ app/build/
 
-eval "./gradlew assemble$pack_variant"
+./gradlew assemble$pack_variant
 
 cd -
