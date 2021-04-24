@@ -119,9 +119,8 @@ then
         ${binary_upload_url}
     )
     node $libs/validate-fir.js "$result"
-    echo -e "\n[$log_prefix] Install app by open link: \033[32m$download_url\033[0m\n"
+    echo -e "\n[$log_prefix] Install app by link or qrcode: \033[32m$download_url\033[0m\n"
     node $libs/qrcode.js --url $download_url
-    echo "\n"
   done
 fi
 
@@ -187,9 +186,8 @@ then
       ${binary_upload_url}
   )
   node $libs/validate-fir.js "$result"
-  echo -e "\n[$log_prefix] Install app by open link: \033[32m$download_url\033[0m\n"
+  echo -e "\n[$log_prefix] Install app by link or qrcode: \033[32m$download_url\033[0m\n"
   node $libs/qrcode.js --url $download_url
-  echo "\n"
 fi
 
 echo -e "\033[32m[$log_prefix] Done!\033[0m"

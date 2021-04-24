@@ -3,7 +3,8 @@ const minimist = require('minimist');
 const args = minimist(process.argv.slice(2));
 
 const create = (url) => {
-    qrcode.setErrorLevel('Q');
+    // L -> M -> Q -> H
+    qrcode.setErrorLevel('L');
     qrcode.generate(url, { small: true });
 };
 
